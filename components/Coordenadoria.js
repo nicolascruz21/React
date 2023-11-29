@@ -87,7 +87,7 @@ const CoordenadoriaGrid = ({ getCoordenadorias, onEdit, setOnEdit, coordenadoria
 
   useEffect(() => {
     axios
-      .get("http://10.22.48.47:8800/coordenadorias")
+      .get("http://localhost:8800/coordenadorias")
       .then((response) => {
         const sortedCoordenadorias = response.data.sort((a, b) => (a.nome > b.nome ? 1 : -1));
         setCoordenadorias(sortedCoordenadorias);
@@ -117,7 +117,7 @@ const CoordenadoriaGrid = ({ getCoordenadorias, onEdit, setOnEdit, coordenadoria
 
     if (onEdit) {
       await axios
-        .put("http://10.22.48.47:8800/coordenadorias/" + onEdit.IdCoordenadoria, {
+        .put("http://localhost:8800/coordenadorias/" + onEdit.IdCoordenadoria, {
           Nome: coordenadoria.Nome.value,
           Status: coordenadoria.Status.value === "true" ? 1 : 0,
         })
@@ -125,7 +125,7 @@ const CoordenadoriaGrid = ({ getCoordenadorias, onEdit, setOnEdit, coordenadoria
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://10.22.48.47:8800/coordenadorias", {
+        .post("http://localhost:8800/coordenadorias", {
           Nome: coordenadoria.Nome.value,
           Status: coordenadoria.Status.value === "true" ? 1 : 0,
         })
@@ -157,7 +157,7 @@ const CoordenadoriaGrid = ({ getCoordenadorias, onEdit, setOnEdit, coordenadoria
 
   const handleDelete = async (IdCoordenadoria) => {
     await axios
-      .delete("http://10.22.48.47:8800/coordenadorias/" + IdCoordenadoria)
+      .delete("http://localhost:8800/coordenadorias/" + IdCoordenadoria)
       .then(({ data }) => {
         const newArray = coordenadorias.filter((coordenadoria) => coordenadoria.IdCoordenadoria !== IdCoordenadoria);
 
