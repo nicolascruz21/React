@@ -88,7 +88,7 @@ const UnidadeGrid = ({ getUnidades, onEdit, setOnEdit, unidades, setUnidades }) 
 
   useEffect(() => {
     axios
-      .get("http://10.22.48.47:8800/unidades")
+      .get("http://localhost:8800/unidades")
       .then((response) => {
         const sortedUnidades = response.data.sort((a, b) => (a.nome > b.nome ? 1 : -1));
       setUnidades(sortedUnidades);
@@ -99,7 +99,7 @@ const UnidadeGrid = ({ getUnidades, onEdit, setOnEdit, unidades, setUnidades }) 
       });
 
     axios
-      .get("http://10.22.48.47:8800/coordenadoriasativas")
+      .get("http://localhost:8800/coordenadoriasativas")
       .then((response) => {
         setCoordenadorias(response.data);
       })
@@ -130,7 +130,7 @@ const UnidadeGrid = ({ getUnidades, onEdit, setOnEdit, unidades, setUnidades }) 
 
     if (onEdit) {
       await axios
-        .put("http://10.22.48.47:8800/unidades/" + onEdit.IdUnidade, {
+        .put("http://localhost:8800/unidades/" + onEdit.IdUnidade, {
           Nome: unidade.Nome.value,
           EH: unidade.EH.value,
           IdCoordenadoria: unidade.IdCoordenadoria.value,
@@ -141,7 +141,7 @@ const UnidadeGrid = ({ getUnidades, onEdit, setOnEdit, unidades, setUnidades }) 
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://10.22.48.47:8800/unidades", {
+        .post("http://localhost:8800/unidades", {
           Nome: unidade.Nome.value,
           EH: unidade.EH.value,
           IdCoordenadoria: unidade.IdCoordenadoria.value,
