@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-// Estilos do Grid
 const Table = styled.table`
   width: 100%;
   background-color: #fff;
@@ -79,7 +78,6 @@ const Button = styled.button`
   height: 42px;
 `;
 
-// Componente combinado
 const CargoGrid = ({ getCargos, onEdit, setOnEdit, cargos, setCargos }) => {
   const Title = styled.h2``;
   const ref = useRef();
@@ -87,7 +85,7 @@ const CargoGrid = ({ getCargos, onEdit, setOnEdit, cargos, setCargos }) => {
 
   useEffect(() => {
     axios
-      .get("http://10.22.48.47:8800/cargos")
+      .get("http://localhost:8800/cargos")
       .then((response) => {
         const sortedCargos = response.data.sort((a, b) => (a.nome > b.nome ? 1 : -1));
         setCargos(sortedCargos);
@@ -116,7 +114,7 @@ const CargoGrid = ({ getCargos, onEdit, setOnEdit, cargos, setCargos }) => {
 
     if (onEdit) {
       await axios
-        .put("http://10.22.48.47:8800/cargos/" + onEdit.IdCargo, {
+        .put("http://localhost:8800/cargos/" + onEdit.IdCargo, {
           Nome: cargo.Nome.value,
           Status: cargo.Status.value === "true" ? 1 : 0,
         })
@@ -124,7 +122,7 @@ const CargoGrid = ({ getCargos, onEdit, setOnEdit, cargos, setCargos }) => {
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://10.22.48.47:8800/cargos", {
+        .post("http://localhost/cargos", {
           Nome: cargo.Nome.value,
           Status: cargo.Status.value === "true" ? 1 : 0,
         })
