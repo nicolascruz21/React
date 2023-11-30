@@ -154,7 +154,7 @@ const CargoGrid = ({ getCargos, onEdit, setOnEdit, cargos, setCargos }) => {
 
   const handleDelete = async (IdCargo) => {
     await axios
-      .delete("http://10.22.48.47:8800/cargos/" + IdCargo)
+      .delete("http://localhost:8800/cargos/" + IdCargo)
       .then(({ data }) => {
         const newArray = cargos.filter((cargo) => cargo.IdCargo !== IdCargo);
 
